@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Button, InputLabel, MenuItem, FormControl, Select,
   Container, Paper, Divider, Typography } from '@material-ui/core';
-import { Send } from '@material-ui/icons';
+import { Send, Cancel } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import '@fontsource/roboto';
+import { Link } from 'react-router-dom';
 
 const useStyles = theme => ({
     root: {
@@ -52,7 +53,7 @@ class Main extends Component {
 
     render () {
         const { classes } = this.props;
-
+        console.log(this.state);
         return (
             <Container fixed className={classes.root}>
                 <Paper elevation={3}>
@@ -77,7 +78,7 @@ class Main extends Component {
                           onChange={this.selectStock}
                           label="stock-list-label"
                         >
-                        <MenuItem value="">
+                        <MenuItem value={null}>
                           <em>주식 선택</em>
                         </MenuItem>
                         <MenuItem value={'삼성전자'}>삼성전자</MenuItem>
@@ -87,15 +88,28 @@ class Main extends Component {
                     </FormControl>
                   </div>
 
-
+                  {/* 열람 버튼 */}
                   <div>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className={classes.button}
-                      endIcon={<Send/>}>
-                      열람하기
-                    </Button>
+                    {this.state.selectedStock === null ?
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        endIcon={<Cancel/>}>
+                        열람불가
+                      </Button>
+                    :
+                      <Link to={`/${this.state.selectedStock}`}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={classes.button}
+                          endIcon={<Send/>}>
+                          열람하기
+                        </Button>
+                      </Link>
+                    }
+
                   </div>
 
                 </Paper>
