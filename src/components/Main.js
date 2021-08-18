@@ -18,18 +18,19 @@ const useStyles = theme => ({
         flexDirection:"column",
         margin: theme.spacing(1),
         width: theme.spacing(80),
-        height: theme.spacing(40),
+        height: theme.spacing(30),
         '& > div': {
           display:"flex",
           justifyContent: "center",
           width: "100%",
+        },
+        '& > div#text': {
           margin: theme.spacing(1),
         }
       },
     },
     formControl: {
-      margin: theme.spacing(2),
-      width: "100%",
+      width: theme.spacing(78),
     },
     button: {
       margin: theme.spacing(1),
@@ -62,13 +63,13 @@ class Main extends Component {
                   </div>
                   <Divider />
 
-                  <div>
+                  <div id="text">
                     <Typography variant="h6">다양한 주식 분석 정보를 알려드려요!</Typography>
                   </div>
                   <Divider />
 
                   {/* 주식 선택 드롭박스 */}
-                  <div>
+                  <div style={{marginTop: "1vh"}}>
                     <FormControl variant="outlined" className={classes.formControl}>
                       <InputLabel id="stock-list-label">열람할 주식을 선택하세요.</InputLabel>
                         <Select
