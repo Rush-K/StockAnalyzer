@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Divider, Paper, Typography, Button,
         List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { ChangeHistory, TrendingUp, LibraryBooks } from '@material-ui/icons';
+import { ChangeHistory, TrendingUp, LibraryBooks, HowToReg } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
 import DailyChart from './DailyChart';
 import TriangularConvergenceChart from './TriangularConvergenceChart';
+import CreditTradingChart from './CreditTradingChart';
 
 const useStyles = theme => ({
     root: {
@@ -25,9 +26,19 @@ const useStyles = theme => ({
     },
     indexPaper: {
         display:"flex",
+        flexDirection: "column",
         margin: theme.spacing(1),
         width: theme.spacing(48),
-        height: "20%"
+        height: "20%",
+        '& > div#index_title': {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            '& > div#title_text': {
+                display: "flex",
+                justifyContent: "center",
+            }
+        }
     },
     menuPaper: {
         display:"flex",
@@ -75,17 +86,32 @@ class StockHome extends Component {
         this.state = {
             DailyChart : false,
             TriangularConvergenceChart : false,
+            CreditTradingChart : false, 
         }
     }
 
     changeDailyChartState = (event) => {
-        this.setState({DailyChart: !this.state.DailyChart,
-                       TriangularConvergenceChart: false});
+        this.setState({
+            DailyChart: !this.state.DailyChart,
+            TriangularConvergenceChart: false,
+            CreditTradingChart: false,
+        });
     }
 
     changeTriangularConvergenceChartState = (event) => {
-        this.setState({DailyChart: false,
-                       TriangularConvergenceChart: !this.state.TriangularConvergenceChart});
+        this.setState({
+            DailyChart: false,
+            TriangularConvergenceChart: !this.state.TriangularConvergenceChart,
+            CreditTradingChart: false,
+        });
+    }
+
+    changeCreditTradingChartState = (event) => {
+        this.setState({
+            DailyChart: false,
+            TriangularConvergenceChart: false,
+            CreditTradingChart: !this.state.CreditTradingChart
+        });
     }
 
     render() {
@@ -95,11 +121,28 @@ class StockHome extends Component {
                 <div>
                     {/* KOSPI COSDAQ 지수 */}
                     <Paper className={classes.indexPaper}>
-                        <Typography>KOSPI 지수</Typography>
+                        <div id="index_title">
+                            <div id="title_text">
+                                <Typography variant="h7">KOSPI</Typography>
+                            </div>
+                            <Divider />
+                            <div id="title_text">
+                                <Typography variant="h1">3000.0</Typography>
+                            </div>
+                        </div>
                     </Paper>
                     <Paper className={classes.indexPaper}>
-                        <Typography>KOSDAQ 지수</Typography>
+                        <div id="index_title">
+                            <div id="title_text">
+                                <Typography variant="h7">KOSDAQ</Typography>
+                            </div>
+                            <Divider />
+                            <div id="title_text">
+                                <Typography variant="h1">1000.0</Typography>
+                            </div>
+                        </div>
                     </Paper>
+
                     {/* 메뉴 */}
                     <Paper elevation={3} className={classes.menuPaper}>
                         <div id="stockname">
@@ -120,7 +163,7 @@ class StockHome extends Component {
                                     </ListItemIcon>
                                     <ListItemText primary="삼각수렴 확인" />
                                 </ListItem>
-                                <ListItem button>
+                                <ListItem button onClick={this.changeCreditTradingChartState}>
                                     <ListItemIcon>
                                         <LibraryBooks />
                                     </ListItemIcon>
@@ -128,7 +171,7 @@ class StockHome extends Component {
                                 </ListItem>
                                 <ListItem button divider>
                                     <ListItemIcon>
-
+                                        <HowToReg />
                                     </ListItemIcon>
                                     <ListItemText primary="투자자 매매현황 확인" />
                                 </ListItem>
@@ -147,6 +190,7 @@ class StockHome extends Component {
                     <Paper elevation={3} className={classes.homePaper}>
                         {this.state.DailyChart === true && <DailyChart changeDailyChartState={this.changeDailyChartState} stockcode={this.props.match.params.stockcode}/>}
                         {this.state.TriangularConvergenceChart === true && <TriangularConvergenceChart changeTriangularConvergenceChartState={this.changeTriangularConvergenceChartState} stockcode={this.props.match.params.stockcode} />}
+                        {this.state.CreditTradingChart === true && <CreditTradingChart changeCreditTradingChartState={this.changeCreditTradingChartState} stockcode={this.props.match.params.stockcode} />}
                     </Paper>
                 </div>
             </Container>
