@@ -59,7 +59,9 @@ class Main extends Component {
                             .catch(function (error) {
                               console.log(error);// error catch
                             });
-      this.setState({stockList: stocklist, stockListLoading: true});
+      if (stocklist != null) {
+        this.setState({stockList: stocklist, stockListLoading: true});
+      }
     }
 
     selectStock = (event) => {
