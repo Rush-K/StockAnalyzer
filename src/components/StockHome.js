@@ -21,7 +21,7 @@ const useStyles = theme => ({
         flexWrap: "wrap",
         justifyContent: "flex-start",
         margin: theme.spacing(1),
-        width: theme.spacing(100),
+        width: theme.spacing(110),
         height: theme.spacing(80),
       },
     },
@@ -29,7 +29,7 @@ const useStyles = theme => ({
         display:"flex",
         flexDirection: "column",
         margin: theme.spacing(1),
-        width: theme.spacing(48),
+        width: theme.spacing(53),
         height: "20%",
         '& > div#index_title': {
             display: "flex",
@@ -52,7 +52,7 @@ const useStyles = theme => ({
         display:"flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        width: theme.spacing(29),
+        width: theme.spacing(34),
         height: "80%",
         margin: theme.spacing(1),
         '& > div#list': {
@@ -76,7 +76,7 @@ const useStyles = theme => ({
         display:"flex",
         alignItems: "center",
         justifyContent: "center",
-        width: theme.spacing(67),
+        width: theme.spacing(72),
         height: "80%",
         margin: theme.spacing(1),
         '& > *': {
