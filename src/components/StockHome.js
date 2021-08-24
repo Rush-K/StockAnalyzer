@@ -246,9 +246,9 @@ class StockHome extends Component {
 
                     {/* 홈 */}
                     <Paper elevation={3} className={classes.homePaper}>
-                        {this.state.DailyChart === true && <DailyChart changeDailyChartState={this.changeDailyChartState} stockcode={this.props.match.params.stockcode}/>}
-                        {this.state.TriangularConvergenceChart === true && <TriangularConvergenceChart changeTriangularConvergenceChartState={this.changeTriangularConvergenceChartState} stockcode={this.props.match.params.stockcode} />}
-                        {this.state.CreditTradingChart === true && <CreditTradingChart changeCreditTradingChartState={this.changeCreditTradingChartState} stockcode={this.props.match.params.stockcode} />}
+                        {this.state.DailyChart === true && <DailyChart changeDailyChartState={this.changeDailyChartState} stockname={this.state.StockName} stockcode={this.props.match.params.stockcode}/>}
+                        {this.state.TriangularConvergenceChart === true && <TriangularConvergenceChart changeTriangularConvergenceChartState={this.changeTriangularConvergenceChartState} stockname={this.state.StockName} stockcode={this.props.match.params.stockcode} />}
+                        {this.state.CreditTradingChart === true && <CreditTradingChart changeCreditTradingChartState={this.changeCreditTradingChartState} stockname={this.state.StockName} stockcode={this.props.match.params.stockcode} />}
                     </Paper>
                 </div>
             </Container>
