@@ -146,6 +146,7 @@ class StockHome extends Component {
 
     render() {
         const { classes } = this.props;
+        console.log(this.props);
         return (
             this.state.stockname === null ?
             <div className={classes.root}>

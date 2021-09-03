@@ -7,6 +7,10 @@ import '@fontsource/roboto';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { clearData } from '../redux/rootReducer';
+
 const useStyles = theme => ({
     root: {
       display: 'flex',
@@ -62,6 +66,8 @@ class Main extends Component {
       if (stocklist != null) {
         this.setState({stockList: stocklist, stockListLoading: true});
       }
+      
+      this.props.clearData();
     }
 
     selectStock = (event) => {
@@ -137,4 +143,12 @@ class Main extends Component {
       }
 }
 
-export default withStyles(useStyles)(Main);
+const mapStateToProps = () => {
+  return {}
+}
+
+const mapDispatchToProps = {
+  clearData: () => clearData()
+}
+
+export default compose(withStyles(useStyles), connect(mapStateToProps, mapDispatchToProps))(Main);
