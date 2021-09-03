@@ -4,6 +4,10 @@ import Chart from 'react-apexcharts';
 import axios from 'axios';
 import { withStyles } from '@material-ui/styles';
 
+import { updateDay, saveData } from '../redux/DailyChart/actions';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
 const useStyles = theme => ({
   root: {
     display:"flex",
@@ -24,10 +28,8 @@ class DailyChart extends Component {
         super(props);
 
         this.state = {
-          day: null,
-            series: [{
-                data: []
-            }],
+            day: this.props.day,
+            series: this.props.series,
             options: {
                 chart: {
                   type: 'candlestick',
@@ -72,15 +74,19 @@ class DailyChart extends Component {
         .replaceAll("\"현재가\":", "").replaceAll("\"고가\":", "").replaceAll("\"저가\":", "").replaceAll("}", "]}");
         let jsonData = JSON.parse(stringData);
         this.setState({series:[{data: jsonData}]});
+
+        this.props.updateDay(this.state.day);
+        this.props.saveData(this.state.series);
       }
     }
 
     render() {
         const { classes } = this.props;
+
         return (
             <div className={classes.root} id="chart">
                 <div id="day_input">
-                  <TextField onChange={this.changeDayState} size="small" id="outlined-basic" label="거래일 입력" variant="outlined" />
+                  <TextField onChange={this.changeDayState} size="small" id="outlined-basic" label="거래일 입력" variant="outlined" defaultValue={this.props.day}/>
                   <Button onClick={this.loadChart} style={{marginLeft: "3px"}} variant="outlined" color="primary" size="large">입력</Button>
                 </div>
                 <Chart options={this.state.options} series={this.state.series} type="candlestick" width="96%" height={350} />
@@ -90,4 +96,16 @@ class DailyChart extends Component {
     }
 }
 
-export default withStyles(useStyles)(DailyChart)
+const mapStateToProps = ({dailyChart}) => {
+  return {
+    day: dailyChart.day,
+    series: dailyChart.series
+  }
+}
+
+const mapDispatchToProps = {
+  updateDay: (day) => updateDay(day),
+  saveData: (series) => saveData(series)
+}
+
+export default compose(withStyles(useStyles), connect(mapStateToProps, mapDispatchToProps))(DailyChart)
