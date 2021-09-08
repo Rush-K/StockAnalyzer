@@ -1,3 +1,8 @@
+.center {
+  display: block;
+  margin: auto;
+}
+
 # StockAnalyzer - 키움 Open API를 이용한 주식 정보 분석 웹 
 
 특정 주식의 분석 정보를 열람할 수 있는 웹
